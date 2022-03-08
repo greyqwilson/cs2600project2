@@ -1,8 +1,5 @@
-#include "greyson-functions.h"
+#include "travelexpenses.h"
 #include <stdio.h>
-
-typedef enum { false, true } bool;
-
 
 float getCarRentals(Trip *trip){
     return trip->rentalCost;
@@ -74,21 +71,41 @@ void setTaxiCost(Day *day, float cost){
     day->taxiCost = cost;
 }
 
-void ReimbursableExpenses(Trip *trip){
-    int spent = TotalExpenses(&trip);
-    int allowed = TotalAllowableExpenses(&trip);
+float ReimbursableExpenses(Trip *trip){
+    int spent = TotalExpenses(trip);
+    int allowed = totalAllowableExpenses(trip);
     if (spent > allowed){
         return spent - allowed;
     }
     return 0;
 }
 
-void AmountSaved(Trip *trip){
-    int spent = TotalExpenses(&trip);
-    int allowed = TotalAllowableExpenses(&trip);
+float AmountSaved(Trip *trip){
+    int spent = TotalExpenses(trip);
+    int allowed = totalAllowableExpenses(trip);
 
     if (spent < allowed){
         return allowed - spent;
     }
     return 0;
+}
+
+void setMealExpenses(Day *day, float breakfastCost, float lunchCost, float dinnerCost){
+    day->meals[0] = breakfastCost;
+    day->meals[1] = lunchCost;
+    day->meals[2] = dinnerCost;
+}
+
+float *getMealExpenses(Day *day){
+    return day->meals;
+}
+
+float getMealTotal(Trip *trip){
+    float total = 0;
+    for (int day = 0; day < trip->daysSpent; day++){
+        total += trip->day[day].meals[0];
+        total += trip->day[day].meals[1];
+        total += trip->day[day].meals[2];
+    }
+    return total;
 }

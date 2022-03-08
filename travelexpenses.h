@@ -1,5 +1,5 @@
-#ifndef GREYSON-FUNCTIONS_H
-#define GREYSON-FUNCTIONS_H
+#ifndef TRAVELEXPENSES_H
+#define TRAVELEXPENSES_H
 
 #define MAXTRIPLENGTH 30
 
@@ -7,7 +7,7 @@ typedef struct Day {
     float taxiCost;
     float milesDriven;
     float parkingCost;
-    float meals[3]; // 0: Breakfast, 1: Lunch, 2: Dinner
+    float meals[3]; //Breakfast = [0], Lunch = [1], Dinner = [2]
 } Day;
 
 typedef struct Trip {     //Allows use of Trip alone instead of struct Trip
@@ -44,4 +44,33 @@ void setTaxiCost(Day *day, float cost);
 float ReimbursableExpenses(Trip *trip);
 
 float AmountSaved(Trip *trip);
+
+void setRegistrationFees(Trip *trip, int registrationFee);
+
+float getRegistrationFees(Trip *trip);
+
+void setArrivalTime(Trip *trip, int time);
+
+int getArrivalTime(Trip *trip);
+
+void setDepartTime(Trip *trip, int time);
+
+int getDepartTme(Trip *trip);
+
+void setHotelExpenses(Trip *trip, float hotelExpenses);
+
+float getHotelExpenses(Trip *trip);
+
+void setRoundTripAirfare(Trip *trip, float airCost);
+
+float totalAllowableExpenses(Trip *trip);
+
+float TotalExpenses(Trip *trip);
+
+void setMealExpenses(Day *day, float breakfastCost, float lunchCost, float dinnerCost);
+
+float *getMealExpenses(Day *day);
+
+float getMealTotal(Trip *trip);
+
 #endif

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "greyson-functions.h"
+#include "travelexpenses.h"
 
 
 int main(){
@@ -32,6 +32,19 @@ int main(){
     setTaxiCost(&trip1.day[0], 5.4);
     setTaxiCost(&trip1.day[1], 3.0);
     printf("Taxi cost total: %f \n", getTaxiCost(&trip1));
+
+    //Test meal cost
+    setMealExpenses(&trip1.day[0], 10, 12, 13);
+    setMealExpenses(&trip1.day[1], 1, 2, 4);
+
+
+    //Printing each meal for each day
+    for(int day=0; day<trip1.daysSpent; day++){
+        float *meals = getMealExpenses(&trip1.day[day]);
+        printf("Day %i Meals: \n B:%.2f \n L:%.2f \n D:%.2f\n", day +1, meals[0], meals[1], meals[2]);
+    }
+    //Get total meal cost for trip
+    printf("Total meal cost: %f\n", getMealTotal(&trip1));
 
     return 0;
 }
